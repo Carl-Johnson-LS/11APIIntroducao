@@ -16,5 +16,3 @@ async function selectUsuarios() {
 }
 
 export { selectUsuarios };
-
-import { selectUsuarios } from "./bd.js";
