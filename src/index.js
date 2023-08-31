@@ -13,7 +13,7 @@ app.use(roteadorLogin);
 
 app.get("/", (req, res) => {
   res.json({
-    message: "API para CRUD usuario: https://github.com/Alvesds-Ian/API-Introducao",
+    message: "API para CRUD usuario:",
   });
 });
 
