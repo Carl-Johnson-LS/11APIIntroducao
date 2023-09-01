@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.json({
-    message: "API para CRUD usuario: https://github.com/Alvesds-Ian/API-Introducao",
+    message: "API para CRUD usuario: https://github.com/Carl-Johnson-LS/11APIIntroducao",
   });
 });
 
