@@ -57,6 +57,7 @@ router.delete("/usuario/:id", verificarAutenticacao, async (req, res) => {
     res.status(error.status || 500).json({ message: error.message || "Erro!" });
   }
 });
+
 router.get("/usuario", async (req, res) => {
   console.log(`Rota GET /usuarios solicitada pelo usuario ${req.userId}`);
   try {
