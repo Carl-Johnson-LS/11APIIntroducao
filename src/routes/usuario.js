@@ -1,5 +1,5 @@
-import {selectUsuario, selectUsuarios, insertUsuario, deleteUsuario, updateUsuario, autenticarUsuario} from "../db/index.js";
 import { Router } from "express";
+import {selectUsuario, selectUsuarios, insertUsuario, deleteUsuario, updateUsuario, autenticarUsuario} from "../db/index.js";
 import verificarAutenticacao from "../middlewares/autenticacao.js";
 const router = Router();
 
@@ -13,22 +13,22 @@ router.get("/usuario", async (req, res) => {
   }
 });
 
+router.post("/usuario", verificarAutenticacao, async (req, res) => {
+  console.log("Rota POST /usuario solicitada");
+  try {
+    await insertUsuario(req.body);
+    res.status(201).json({ message: "Usuário inserido com sucesso!" });
+  } catch (error) {
+    res.status(error.status || 500).json({ message: error.message || "Erro!" });
+  }
+});
+
 router.get("/usuario/:id", async (req, res) => {
   console.log(`Rota GET /usuario/${req.params.id} solicitada`);
   try {
     const usuario = await selectUsuario(req.params.id);
     if (usuario.length > 0) res.json(usuario);
     else res.status(404).json({ message: "Usuário não encontrado!" });
-  } catch (error) {
-    res.status(error.status || 500).json({ message: error.message || "Erro!" });
-  }
-});
-
-router.post("/usuario", verificarAutenticacao, async (req, res) => {
-  console.log("Rota POST /usuario solicitada");
-  try {
-    await insertUsuario(req.body);
-    res.status(201).json({ message: "Usuário inserido com sucesso!" });
   } catch (error) {
     res.status(error.status || 500).json({ message: error.message || "Erro!" });
   }
@@ -57,5 +57,15 @@ router.delete("/usuario/:id", verificarAutenticacao, async (req, res) => {
     res.status(error.status || 500).json({ message: error.message || "Erro!" });
   }
 });
+router.get("/usuario", async (req, res) => {
+  console.log(`Rota GET /usuarios solicitada pelo usuario ${req.userId}`);
+  try {
+    const usuarios = await selectUsuarios();
+    res.json(usuarios);
+  } catch (error) {
+    res.status(error.status || 500).json({ message: error.message || "Erro!" });
+  }
+});
+
 
 export default router;
