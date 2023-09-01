@@ -1,5 +1,13 @@
-import {selectUsuario, selectUsuarios, insertUsuario, deleteUsuario, updateUsuario, autenticarUsuario} from "../db/index.js";
 import { Router } from "express";
+
+import {
+  selectUsuario,
+  selectUsuarios,
+  insertUsuario,
+  deleteUsuario,
+  updateUsuario,
+} from "../db/index.js";
+
 const router = Router();
 
 router.get("/usuario", async (req, res) => {
